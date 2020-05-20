@@ -18,8 +18,7 @@ public class SpartanTests {
                 auth().basic("admin", "admin").
                 baseUri(BASE_URL).when().get("/api/spartans").
                 prettyPeek().then().statusCode(200);
-        //how we verify response? - use assertions
-        //how we verify response? - use assertions
+//        how we verify response? - use assertions
     }
 
     @Test
@@ -28,16 +27,16 @@ public class SpartanTests {
         String body = "{\"gender\": \"Male\", \"name\": \"Mohammed\",\"phone\": 3218792353}";
         File jsonFile = new File(System.getProperty("user.dir") + "/Spartan.json");
 
-            given().
-                    contentType(ContentType.JSON).
-                    auth().basic("admin", "admin").
-                    body(jsonFile).
-                    baseUri(BASE_URL).when().post("/api/spartans").prettyPeek().then().statusCode(201);
-        }
+        given().
+                contentType(ContentType.JSON).
+                auth().basic("admin", "admin").
+                body(jsonFile).
+                baseUri(BASE_URL).when().post("/api/spartans").prettyPeek().then().statusCode(201);
+    }
 
     @Test
     @DisplayName("Delete some spartan and verify that status code is 204")
-    public void deleteSpartanTest(){
+    public void deleteSpartanTest() {
         //{id} - path parameter
         //YOU CANNOT DELETE SOMETHING TWICE
         //we yse delete() method to delete something
