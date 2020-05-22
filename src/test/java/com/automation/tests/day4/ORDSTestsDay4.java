@@ -98,5 +98,33 @@ public class ORDSTestsDay4 {
 
         Map<String, ?> poorGuy = response.jsonPath().get("items.min{it.salary}");
         System.out.println(poorGuy);
+
+        int companysPayroll = response.jsonPath().get("items.collect{it.salary}.sum()");
+        System.out.println("Company's payroll: " + companysPayroll);
+    }
+
+    @Test
+    @DisplayName("Verify that every employee has positive salary")
+    public void testSalary() {
+        when().
+                get("/employees").
+                then().assertThat().
+                statusCode(200).
+                body("items.salary", everyItem(greaterThan(0))).
+                log().ifError();
+    }
+
+    /**
+     * given path parameter is “/employees/{id}”
+     * and path parameter is 101
+     * when user makes get request
+     * then assert that status code is 200
+     * and verifies that phone number is 515-123-4568
+     */
+    @Test
+    @DisplayName("Verify that every employee has positive salary")
+    public void testPhoneNumber() {
+        when().
+                get("/employees/{id}", 101).prettyPeek().then().assertThat().statusCode(200).body("phone_number", is("515.123.4568"));
     }
 }
