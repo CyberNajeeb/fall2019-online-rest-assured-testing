@@ -38,6 +38,10 @@ public class Spartan {
         this.phone = phone;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
